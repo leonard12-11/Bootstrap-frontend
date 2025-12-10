@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard & Bewerbung</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  background: linear-gradient(135deg,#020617,#0f172a);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {text-align:center; margin:20px 0; text-shadow:0 0 15px cyan;}
+
+.card, .form-card {
+  background: rgba(49, 44, 44, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+}
+
+input, textarea, select {
+  background: #f1eded !important;
+  color: #fff !important;
+}
+
+label {font-weight:bold;}
+
+iframe {width:100%; height:250px; border-radius:12px; border:0;}
+
+#success {color:#00ffcc; font-size:1.3em;}
+
+.divider {
+  height:4px;
+  background: cyan;
+  width:80%;
+  margin:40px auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<h1>⚡ DASHBOARD</h1>
+
+<div class="row g-3">
+
+<div class="col-md-6">
+<div class="card text-center">
+<h5>🐱 Katze</h5>
+<button id="btnCat" class="btn btn-info">Laden</button>
+<div id="cat"></div>
+</div></div>
+
+<div class="col-md-6">
+<div class="card text-center">
+<h5>₿ Bitcoin</h5>
+<button id="btnBTC" class="btn btn-warning">Preis</button>
+<div id="btc"></div>
+</div></div>
+
+<div class="col-md-6">
+<div class="card text-center">
+<h5>🌤 Wetter</h5>
+<button id="btnWeather" class="btn btn-primary">Abrufen</button>
+<div id="weather"></div>
+</div></div>
+
+<div class="col-md-6">
+<div class="card text-center">
+<h5>⚡ Ladesäulen</h5>
+<button id="btnCharge" class="btn btn-success">Anzeigen</button>
+<ul id="charge"></ul>
+</div></div>
+
+<div class="col-12">
+<div class="card text-center">
+<h5>🗺 Karte</h5>
+<button id="btnMap" class="btn btn-secondary">Zeigen</button>
+<div id="map"></div>
+</div></div>
+
+</div>
+
+<div class="divider"></div>
+
+<h1>📄 BEWERBUNG</h1>
+
+<div class="form-card">
+
+<form method="POST" action="https://webhook.site/8eb8d4fe-e0a1-43a8-898b-1f91ef36bd9b">
+
+<div class="row g-3">
+
+<div class="col-md-4">
+<label>Geschlecht</label>
+<select name="Geschlecht" required class="form-select">
+<option value="">Wählen</option>
+<option>M</option><option>F</option><option>D</option>
+</select></div>
+
+<div class="col-md-4">
+<label>Vorname</label>
+<input name="Vorname" required class="form-control">
+</div>
+
+<div class="col-md-4">
+<label>Name</label>
+<input name="Name" required class="form-control">
+</div>
+
+<div class="col-12">
+<label>Adresse</label>
+<input name="Adresse" required class="form-control">
+</div>
+
+<div class="col-md-3">
+<label>PLZ</label>
+<input name="PLZ" pattern="\d{4}" required class="form-control">
+</div>
+
+<div class="col-md-9">
+<label>Ort</label>
+<input name="Ort" required class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>Email</label>
+<input type="email" name="Email" required class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>Telefon</label>
+<input name="Telefon" required class="form-control">
+</div>
+
+<div class="col-12">
+<label>Motivation</label>
+<textarea name="Motivation" required class="form-control"></textarea>
+</div>
+
+<div class="col-md-6">
+<label>Lebenslauf (PDF)</label>
+<input type="file" name="CV" accept="application/pdf" required class="form-control">
+</div>
+
+<div class="col-md-6">
+<label>Portfolio</label>
+<input type="url" name="Portfolio" required class="form-control">
+</div>
+
+<div class="col-12">
+<input required type="checkbox"> Datenschutz akzeptiert
+</div>
+
+<div class="col-12 text-end">
+<button type="submit" class="btn btn-primary">SENDEN</button>
+</div>
+
+</div>
+</form>
+
+<p id="success" class="text-center mt-3">Nach dem Absenden siehst du die Daten bei webhook.site</p>
+
+</div>
+
+</div>
+
+<script>
+// Katze
+$("#btnCat").click(()=>$.get("https://api.thecatapi.com/v1/images/search",d=>
+$("#cat").html(`<img src="${d[0].url}" class="img-fluid mt-2">`)));
+
+// Bitcoin
+$("#btnBTC").click(()=>$.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=chf",d=>
+$("#btc").html("CHF "+d.bitcoin.chf)));
+
+// Wetter
+$("#btnWeather").click(()=>$.get("https://api.open-meteo.com/v1/forecast?latitude=47.37&longitude=8.55&current_weather=true",d=>
+$("#weather").html(d.current_weather.temperature+" °C")));
+
+// Ladesäulen Demo
+$("#btnCharge").click(()=>["Zürich","Bern","Basel"].forEach(c=>$("#charge").append("<li>"+c+"</li>")));
+
+// Karte
+$("#btnMap").click(()=>$("#map").html(`<iframe src="https://www.openstreetmap.org/export/embed.html?bbox=8.50,47.33,8.60,47.40"></iframe>`));
+</script>
+
+</body>
+</html>
