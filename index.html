@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API-Projekt mit Bootstrap & jQuery</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Leaflet Karte -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body class="bg-light">
+
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">API-Demo 😎</h1>
+
+    <!-- Zufälliges Katzenbild -->
+    <div class="card mb-4 p-4 text-center shadow-sm">
+      <h3>🐱 Zufälliges Katzenbild</h3>
+      <button class="btn btn-primary my-3" id="btnCat">Katzenbild laden</button><br>
+      <img id="catImage" src="" alt="Katzenbild erscheint hier" class="img-fluid rounded shadow-sm">
+    </div>
+
+    <!-- Bitcoin -->
+    <div class="card mb-4 p-4 text-center shadow-sm">
+      <h3>💰 Bitcoin-Preis</h3>
+      <button class="btn btn-warning my-3" id="btnBitcoin">Bitcoin-Preis anzeigen</button><br>
+      <p>USD: <span id="btcUSD">--</span> | CHF: <span id="btcCHF">--</span></p>
+    </div>
+
+    <!-- Wetter -->
+    <div class="card mb-4 p-4 text-center shadow-sm">
+      <h3>🌦️ Aktuelles Wetter</h3>
+      <button class="btn btn-info my-3" id="btnWeather">Wetter anzeigen</button><br>
+      <p>Ort: Zürich | <span id="temp">--</span></p>
+    </div>
+
+    <!-- Stromtankstellen -->
+    <div class="card mb-4 p-4 text-center shadow-sm">
+      <h3>⚡ Nächstgelegene Strom-Tankstellen</h3>
+      <button class="btn btn-success my-3" id="btnStations">Tankstellen anzeigen</button><br>
+      <ul id="stationList" class="list-unstyled"></ul>
+    </div>
+
+    <!-- Karte -->
+    <div class="card p-4 text-center shadow-sm">
+      <h3>🗺️ Karte</h3>
+      <button class="btn btn-secondary my-3" id="btnMap">Karte anzeigen</button><br>
+      <div id="mapPlaceholder" class="border rounded bg-white" style="height:300px;">
+        Karte kommt hier hin
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Deine App -->
+  <script src="app.js"></script>
+</body>
+</html>
