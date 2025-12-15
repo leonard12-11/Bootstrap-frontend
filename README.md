@@ -1,165 +1,93 @@
-# ⚡ Smart Dashboard & Bewerbungsformular (Bootstrap + jQuery)
+# ⚡ Smart Dashboard & Bewerbungsformular (Bootstrap Frontend)
 
-Dieses Projekt ist ein modernes **Dashboard mit API-Anbindungen** sowie ein **validiertes Bewerbungsformular**.  
-Es wurde mit **Bootstrap 5**, **jQuery**, **Leaflet** und offenen APIs umgesetzt (kein API-Key nötig 😎).
+Dieses Projekt ist ein **modernes Dashboard mit API-Anbindungen** sowie ein **vollständiges, valides Bewerbungsformular**.  
+Die Umsetzung erfolgte mit **Bootstrap 5**, **jQuery**, **Leaflet** und **offenen APIs** (kein API-Key nötig 😎).
 
 ---
 
-## 🚀 Features Dashboard
+## 🚀 Dashboard-Funktionen
 
 - 🐱 Zufälliges Katzenbild (TheCatAPI)
 - ₿ Bitcoin-Preis in **USD & CHF** (CoinGecko)
-- 🌤 Aktuelles Wetter für **Zürich**
+- 🌤 Aktuelles Wetter für **Zürich** (Open-Meteo)
 - ⚡ Anzeige der **5 nächstgelegenen Strom-Tankstellen**
 - 🗺 Interaktive **Leaflet-Karte** (Winterthur)
-- 📍 Klick auf Tankstelle zentriert die Karte
+- 📍 Klick auf Tankstelle zentriert die Karte (Advanced)
 
 ---
 
-## 📄 Bewerbungsformular
+## 📄 Bewerbungsformular (vollständig)
 
-- Modernes Bootstrap-Formular
+Das Formular dient zur **Digitalisierung von Praktikums-Bewerbungen** und erfüllt alle Anforderungen der Aufgabenstellung.
+
+### Enthaltene Formularfelder
+
+**Persönliche Daten**
+- Geschlecht (Auswahl)
+- Vorname
+- Nachname
+- Strasse & Nr.
+- PLZ (Validierung: 4-stellig)
+- Ort
+
+**Kontakt**
+- E-Mail (Typ `email`)
+- Handy-Nummer
+- Bevorzugte Kontaktart (Auswahl)
+- Geburtsdatum (Datumsauswahl)
+
+**Bewerbung**
+- Motivationsschreiben (Textarea)
+- Lebenslauf (PDF-Upload)
+- Portfolio-Link (URL)
+
+**Datenschutz**
+- Externer Link zu Datenschutzbestimmungen
+- Checkbox zum Akzeptieren (Pflichtfeld)
+
+**Abschluss**
+- Senden-Button mit Mail-Icon
 - Browser-seitige Validierung
-- PDF-Upload
-- Datenschutz-Checkbox
-- POST-Übermittlung an **Webhook**
-- Subtile Animationen & Effekte
+- POST-Übermittlung an Webhook-Endpoint
+
+---
+
+## 🧠 Validierung & UX
+
+- HTML5-Validierungen (`required`, `type`, `pattern`)
+- Bootstrap-Feedback (`was-validated`)
+- Subtile Hover- & Fokus-Effekte
+- Glassmorphism-Design
+- Benutzerfreundliche Struktur mit Überschriften
 
 ---
 
 ## 📦 Verwendete Technologien
 
 - HTML5
-- CSS (Glassmorphism)
+- CSS3 (Glassmorphism)
 - Bootstrap 5
 - jQuery
 - Leaflet
-- Open APIs (ohne Key)
+- Open APIs (ohne API-Key)
+- Webhook.site (Formular-Endpoint)
 
 ---
 
-## 🧠 Hinweis
+## 📄 Vollständiger Beispiel-Code (index.html)
 
-👉 **Der folgende Code gehört in eine `index.html` Datei**  
-👉 Dieser README dient der **Dokumentation**
+> ℹ️ **Hinweis:**  
+> Dieser Code gehört in eine `index.html`.  
+> Das README dient der Dokumentation des Projekts.
 
----
 
-## 📄 Vollständiger Code
-
-```html
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smart Dashboard & Bewerbung</title>
-
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
-<!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-body{
-  background:linear-gradient(135deg,#020617,#0f172a);
-  font-family:'Poppins',sans-serif;
-  color:#f8fafc;
-}
-.glass{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(14px);
-  border-radius:18px;
-  padding:22px;
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-  transition:.3s;
-}
-.glass:hover{transform:translateY(-6px)}
-.btn{border-radius:50px}
-.list-group-item{
-  background:rgba(255,255,255,.06);
-  color:white;
-  border:none;
-  cursor:pointer;
-}
-.list-group-item:hover{background:rgba(56,189,248,.25)}
-#map{height:320px;border-radius:14px}
-.form-control,.form-select{
-  background:rgba(255,255,255,.08);
-  color:white;
-  border:1px solid rgba(255,255,255,.2);
-}
-.form-control:focus{
-  border-color:#38bdf8;
-  box-shadow:0 0 10px rgba(56,189,248,.5);
-}
-</style>
-</head>
-
-<body>
-<div class="container py-5">
-
-<h1 class="text-center mb-5">⚡ Smart Dashboard</h1>
-
-<div class="row g-4">
-
-<div class="col-md-4">
-<div class="glass text-center">
-<h5>🐱 Zufällige Katze</h5>
-<button id="btnCat" class="btn btn-outline-info mt-2">Laden</button>
-<div id="cat" class="mt-3"></div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="glass text-center">
-<h5>₿ Bitcoin</h5>
-<button id="btnBTC" class="btn btn-outline-warning mt-2">Preis laden</button>
-<div id="btc" class="mt-3"></div>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="glass text-center">
-<h5>🌤 Wetter Zürich</h5>
-<button id="btnWeather" class="btn btn-outline-primary mt-2">Anzeigen</button>
-<div id="weather" class="mt-3"></div>
-</div>
-</div>
-
-<div class="col-md-6">
-<div class="glass">
-<h5>⚡ Strom-Tankstellen Winterthur</h5>
-<button id="btnCharge" class="btn btn-outline-success mt-2">Laden</button>
-<ul id="charges" class="list-group mt-3"></ul>
-</div>
-</div>
-
-<div class="col-md-6">
-<div class="glass">
-<h5>🗺 Karte (Winterthur)</h5>
-<div id="map"></div>
-</div>
-</div>
-
-</div>
-
-<hr class="my-5">
-
+<!-- HIER BEGINNT DAS FORMULAR -->
 <h2 class="text-center mb-4">📄 Bewerbungsformular</h2>
 
 <div class="glass">
 <form id="form" class="row g-3 needs-validation" novalidate>
+
+<h5>Persönliche Daten</h5>
 
 <div class="col-md-3">
 <label class="form-label">Geschlecht</label>
@@ -173,28 +101,30 @@ body{
 
 <div class="col-md-4">
 <label class="form-label">Vorname</label>
-<input class="form-control" required>
+<input type="text" class="form-control" required>
 </div>
 
 <div class="col-md-5">
-<label class="form-label">Name</label>
-<input class="form-control" required>
+<label class="form-label">Nachname</label>
+<input type="text" class="form-control" required>
 </div>
 
 <div class="col-12">
 <label class="form-label">Strasse & Nr.</label>
-<input class="form-control" required>
+<input type="text" class="form-control" required>
 </div>
 
 <div class="col-md-4">
 <label class="form-label">PLZ</label>
-<input class="form-control" pattern="\d{4}" required>
+<input type="text" class="form-control" pattern="\d{4}" required>
 </div>
 
 <div class="col-md-8">
 <label class="form-label">Ort</label>
-<input class="form-control" required>
+<input type="text" class="form-control" required>
 </div>
+
+<h5>Kontakt</h5>
 
 <div class="col-md-6">
 <label class="form-label">E-Mail</label>
@@ -202,12 +132,27 @@ body{
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Handy</label>
+<label class="form-label">Handy-Nummer</label>
 <input type="tel" class="form-control" required>
 </div>
 
+<div class="col-md-6">
+<label class="form-label">Bevorzugte Kontaktart</label>
+<select class="form-select" required>
+<option>Email</option>
+<option>Telefon</option>
+</select>
+</div>
+
+<div class="col-md-6">
+<label class="form-label">Geburtsdatum</label>
+<input type="date" class="form-control" required>
+</div>
+
+<h5>Bewerbung</h5>
+
 <div class="col-12">
-<label class="form-label">Motivation</label>
+<label class="form-label">Motivationsschreiben</label>
 <textarea class="form-control" rows="4" required></textarea>
 </div>
 
@@ -217,50 +162,29 @@ body{
 </div>
 
 <div class="col-md-6">
-<label class="form-label">Portfolio URL</label>
+<label class="form-label">Portfolio-URL</label>
 <input type="url" class="form-control" required>
+</div>
+
+<div class="col-12">
+<a href="https://www.edoeb.admin.ch" target="_blank">
+Datenschutzbestimmungen
+</a>
 </div>
 
 <div class="col-12 form-check">
 <input class="form-check-input" type="checkbox" required>
-<label class="form-check-label">Datenschutz akzeptieren</label>
+<label class="form-check-label">
+Ich akzeptiere die Datenschutzbestimmungen
+</label>
 </div>
 
 <div class="col-12 text-end">
-<button class="btn btn-primary">📧 Bewerbung senden</button>
+<button class="btn btn-primary">
+📧 Bewerbung senden
+</button>
 </div>
 
 </form>
 </div>
-
-</div>
-
-<script>
-const LAT=47.3769,LON=8.5417;
-const WINT_LAT=47.4988,WINT_LON=8.7237;
-
-const map=L.map('map').setView([WINT_LAT,WINT_LON],14);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-let marker=L.marker([WINT_LAT,WINT_LON]).addTo(map);
-
-$("#btnCat").click(()=>$.get("https://api.thecatapi.com/v1/images/search",d=>$("#cat").html(`<img src="${d[0].url}" class="img-fluid rounded">`)));
-
-$("#btnBTC").click(()=>$.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,chf",d=>$("#btc").html(`USD ${d.bitcoin.usd}<br>CHF ${d.bitcoin.chf}`)));
-
-$("#btnWeather").click(()=>$.get(`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&forecast_days=1&timezone=Europe/Zurich`,
-d=>$("#weather").html(`Max ${d.daily.temperature_2m_max[0]}°C<br>Min ${d.daily.temperature_2m_min[0]}°C<br>Regen ${d.daily.precipitation_sum[0]} mm`)));
-
-$("#btnCharge").click(()=>{
-$("#charges").empty();
-$.get("https://data.geo.admin.ch/ch.bfe.ladestellen-elektromobilitaet/data/ch.bfe.ladestellen-elektromobilitaet.json",
-d=>d.features.slice(0,5).forEach(s=>{
-const c=s.geometry.coordinates;
-$(`<li class="list-group-item">${s.properties.name||"Ladestation"}</li>`)
-.click(()=>{map.setView([c[1],c[0]],16);marker.setLatLng([c[1],c[0]]);})
-.appendTo("#charges");
-}));
-});
-</script>
-
-</body>
-</html>
+<!-- HIER ENDET DAS FORMULAR -->
