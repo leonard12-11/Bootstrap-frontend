@@ -1,190 +1,137 @@
-# ⚡ Smart Dashboard & Bewerbungsformular (Bootstrap Frontend)
+SMART DASHBOARD & BEWERBUNGSFORMULAR
+===================================
 
-Dieses Projekt ist ein **modernes Dashboard mit API-Anbindungen** sowie ein **vollständiges, valides Bewerbungsformular**.  
-Die Umsetzung erfolgte mit **Bootstrap 5**, **jQuery**, **Leaflet** und **offenen APIs** (kein API-Key nötig 😎).
+Dieses Projekt ist eine statische Website (HTML, CSS, JavaScript),
+die mit Bootstrap, jQuery und Leaflet umgesetzt wurde.
 
----
+-------------------------------------------------
+DASHBOARD – API-FUNKTIONEN
+-------------------------------------------------
 
-## 🚀 Dashboard-Funktionen
+1) Zufälliges Katzenbild
+- API: https://api.thecatapi.com/v1/images/search
+- Wird per Button-Klick geladen
+- Bild wird dynamisch ins Dashboard gerendert
 
-- 🐱 Zufälliges Katzenbild (TheCatAPI)
-- ₿ Bitcoin-Preis in **USD & CHF** (CoinGecko)
-- 🌤 Aktuelles Wetter für **Zürich** (Open-Meteo)
-- ⚡ Anzeige der **5 nächstgelegenen Strom-Tankstellen**
-- 🗺 Interaktive **Leaflet-Karte** (Winterthur)
-- 📍 Klick auf Tankstelle zentriert die Karte (Advanced)
+2) Bitcoin-Preis
+- API: https://api.coingecko.com/api/v3/simple/price
+- Anzeige in USD und CHF
+- Aktualisierung per Button
 
----
+3) Wetter Zürich
+- API: https://api.open-meteo.com
+- Koordinaten:
+  LAT = 47.3769
+  LON = 8.5417
+- Anzeige:
+  - Max-Temperatur
+  - Min-Temperatur
+  - Niederschlagsmenge
 
-## 📄 Bewerbungsformular (vollständig)
+4) Strom-Tankstellen Winterthur
+- JSON-Daten:
+  https://data.geo.admin.ch/ch.bfe.ladestellen-elektromobilitaet/data/ch.bfe.ladestellen-elektromobilitaet.json
+- Koordinaten Winterthur:
+  LAT = 47.4988
+  LON = 8.7237
+- Anzeige der 5 nächstgelegenen Tankstellen
+- Klick auf eine Tankstelle zentriert die Karte
 
-Das Formular dient zur **Digitalisierung von Praktikums-Bewerbungen** und erfüllt alle Anforderungen der Aufgabenstellung.
+5) Karte (Leaflet)
+- Bibliothek: Leaflet.js
+- Zentriert auf:
+  Pionierstrasse 28, Winterthur
+- Marker bewegt sich bei Klick auf Tankstelle
 
-### Enthaltene Formularfelder
+-------------------------------------------------
+BEWERBUNGSFORMULAR
+-------------------------------------------------
 
-**Persönliche Daten**
+Das Formular ist vollständig mit Bootstrap umgesetzt
+und enthält browserseitige Validierung.
+
+Felder:
 - Geschlecht (Auswahl)
 - Vorname
 - Nachname
-- Strasse & Nr.
-- PLZ (Validierung: 4-stellig)
+- Strasse und Nr.
+- PLZ (4-stellig, validiert)
 - Ort
-
-**Kontakt**
-- E-Mail (Typ `email`)
+- E-Mail (validiert)
 - Handy-Nummer
-- Bevorzugte Kontaktart (Auswahl)
-- Geburtsdatum (Datumsauswahl)
-
-**Bewerbung**
+- Bevorzugte Kontaktart
+- Geburtsdatum
 - Motivationsschreiben (Textarea)
-- Lebenslauf (PDF-Upload)
+- Lebenslauf (PDF Upload)
 - Portfolio-Link (URL)
+- Externer Datenschutz-Link
+- Checkbox Datenschutz akzeptieren
+- Senden-Button mit Icon
 
-**Datenschutz**
-- Externer Link zu Datenschutzbestimmungen
-- Checkbox zum Akzeptieren (Pflichtfeld)
+Validierung:
+- Pflichtfelder mit required
+- Pattern für PLZ
+- Typvalidierung für E-Mail / URL
+- Visuelle Rückmeldung mit Bootstrap
 
-**Abschluss**
-- Senden-Button mit Mail-Icon
-- Browser-seitige Validierung
-- POST-Übermittlung an Webhook-Endpoint
+-------------------------------------------------
+FORMULAR-VERARBEITUNG (WEBHOOK)
+-------------------------------------------------
 
----
+Die Formulardaten werden per HTTP POST
+an einen Webhook-Endpoint gesendet.
 
-## 🧠 Validierung & UX
+Empfohlener Service:
+https://webhook.site/
 
-- HTML5-Validierungen (`required`, `type`, `pattern`)
-- Bootstrap-Feedback (`was-validated`)
-- Subtile Hover- & Fokus-Effekte
-- Glassmorphism-Design
-- Benutzerfreundliche Struktur mit Überschriften
+Ablauf:
+1) Webhook-URL auf webhook.site generieren
+2) URL im JavaScript eintragen
+3) Formular absenden
+4) Daten erscheinen im Webhook-Dashboard
+5) Erfolgsnachricht wird angezeigt
 
----
+Kein eigenes Backend notwendig.
 
-## 📦 Verwendete Technologien
+-------------------------------------------------
+SICHERHEIT – NEVER TRUST USER INPUT
+-------------------------------------------------
+
+- Browserseitige Validierung aktiv
+- Erwartete Datentypen (email, url, date)
+- Pflichtfelder definiert
+- Vorbereitung für serverseitige Validierung
+
+-------------------------------------------------
+DEPLOYMENT
+-------------------------------------------------
+
+- Repository liegt auf GitHub
+- Website wird über GitHub Pages ausgeliefert
+- Jede Änderung (Commit + Push) triggert automatisches Re-Deployment
+- Keine serverseitige Logik notwendig (statische Website)
+
+-------------------------------------------------
+TOOLS & TECHNOLOGIEN
+-------------------------------------------------
 
 - HTML5
-- CSS3 (Glassmorphism)
+- CSS3
 - Bootstrap 5
+- JavaScript
 - jQuery
-- Leaflet
+- Leaflet.js
 - Open APIs (ohne API-Key)
-- Webhook.site (Formular-Endpoint)
+- GitHub Pages
 
----
+-------------------------------------------------
+STATUS
+-------------------------------------------------
 
-## 📄 Vollständiger Beispiel-Code (index.html)
+✔ Alle Pflichtaufgaben umgesetzt  
+✔ Erweiterte Aufgaben (Advanced) integriert  
+✔ API-Anbindungen funktional  
+✔ Formular validiert & angebunden  
+✔ Deployment über GitHub Pages  
 
-> ℹ️ **Hinweis:**  
-> Dieser Code gehört in eine `index.html`.  
-> Das README dient der Dokumentation des Projekts.
-
-``html
-<!-- HIER BEGINNT DAS FORMULAR -->
-<h2 class="text-center mb-4">📄 Bewerbungsformular</h2>
-
-<div class="glass">
-<form id="form" class="row g-3 needs-validation" novalidate>
-
-<h5>Persönliche Daten</h5>
-
-<div class="col-md-3">
-<label class="form-label">Geschlecht</label>
-<select class="form-select" required>
-<option value="">Bitte wählen</option>
-<option>Männlich</option>
-<option>Weiblich</option>
-<option>Divers</option>
-</select>
-</div>
-
-<div class="col-md-4">
-<label class="form-label">Vorname</label>
-<input type="text" class="form-control" required>
-</div>
-
-<div class="col-md-5">
-<label class="form-label">Nachname</label>
-<input type="text" class="form-control" required>
-</div>
-
-<div class="col-12">
-<label class="form-label">Strasse & Nr.</label>
-<input type="text" class="form-control" required>
-</div>
-
-<div class="col-md-4">
-<label class="form-label">PLZ</label>
-<input type="text" class="form-control" pattern="\d{4}" required>
-</div>
-
-<div class="col-md-8">
-<label class="form-label">Ort</label>
-<input type="text" class="form-control" required>
-</div>
-
-<h5>Kontakt</h5>
-
-<div class="col-md-6">
-<label class="form-label">E-Mail</label>
-<input type="email" class="form-control" required>
-</div>
-
-<div class="col-md-6">
-<label class="form-label">Handy-Nummer</label>
-<input type="tel" class="form-control" required>
-</div>
-
-<div class="col-md-6">
-<label class="form-label">Bevorzugte Kontaktart</label>
-<select class="form-select" required>
-<option>Email</option>
-<option>Telefon</option>
-</select>
-</div>
-
-<div class="col-md-6">
-<label class="form-label">Geburtsdatum</label>
-<input type="date" class="form-control" required>
-</div>
-
-<h5>Bewerbung</h5>
-
-<div class="col-12">
-<label class="form-label">Motivationsschreiben</label>
-<textarea class="form-control" rows="4" required></textarea>
-</div>
-
-<div class="col-md-6">
-<label class="form-label">Lebenslauf (PDF)</label>
-<input type="file" class="form-control" accept="application/pdf" required>
-</div>
-
-<div class="col-md-6">
-<label class="form-label">Portfolio-URL</label>
-<input type="url" class="form-control" required>
-</div>
-
-<div class="col-12">
-<a href="https://www.edoeb.admin.ch" target="_blank">
-Datenschutzbestimmungen
-</a>
-</div>
-
-<div class="col-12 form-check">
-<input class="form-check-input" type="checkbox" required>
-<label class="form-check-label">
-Ich akzeptiere die Datenschutzbestimmungen
-</label>
-</div>
-
-<div class="col-12 text-end">
-<button class="btn btn-primary">
-📧 Bewerbung senden
-</button>
-</div>
-
-</form>
-</div>
-<!-- HIER ENDET DAS FORMULAR -->
+Projekt abgeschlossen 😎
