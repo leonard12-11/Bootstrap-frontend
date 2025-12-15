@@ -80,7 +80,7 @@ Das Formular dient zur **Digitalisierung von Praktikums-Bewerbungen** und erfül
 > Dieser Code gehört in eine `index.html`.  
 > Das README dient der Dokumentation des Projekts.
 
-
+``html
 <!-- HIER BEGINNT DAS FORMULAR -->
 <h2 class="text-center mb-4">📄 Bewerbungsformular</h2>
 
