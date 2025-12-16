@@ -13,91 +13,109 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
-/* 🌌 WINTER BACKGROUND */
+/* 🎄 CHRISTMAS / WINTER THEME – SICHTBAR */
 body{
-  background:radial-gradient(circle at top,#38bdf8,#020617);
-  min-height:100vh;
-  color:#e5e7eb;
-  font-family:system-ui;
-  overflow-x:hidden;
+  background:
+    radial-gradient(circle at top, #0ea5e9, #020617),
+    linear-gradient(120deg, #064e3b, #7c2d12);
+  color:#f8fafc;
+  font-family:'Poppins',system-ui;
 }
 
-/* ❄️ SCHNEEFALL */
-.snowflake{
-  position:fixed;
-  top:-10px;
-  color:white;
-  font-size:1em;
-  animation:fall linear infinite;
-  opacity:.8;
-}
-@keyframes fall{
-  to{transform:translateY(110vh);}
-}
-
-/* 🧊 GLASS CARDS */
-.card-glass{
-  background:rgba(255,255,255,.15);
-  backdrop-filter:blur(18px);
-  border-radius:25px;
-  border:1px solid rgba(255,255,255,.35);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  padding:25px;
-  margin-bottom:30px;
+/* ❄️ GLASS + FROST */
+.glass{
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.35),
+    rgba(255,255,255,.05)
+  );
+  backdrop-filter:blur(22px);
+  border-radius:22px;
+  border:2px solid rgba(255,255,255,.4);
+  box-shadow:
+    0 0 40px rgba(186,230,253,.6),
+    inset 0 0 30px rgba(255,255,255,.25);
+  position:relative;
 }
 
-/* ✨ TITEL */
-h1,h2,h4{
+/* ✨ WEIHNACHTS-GLOW */
+.glass::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:24px;
+  box-shadow:0 0 35px rgba(34,197,94,.35);
+  pointer-events:none;
+}
+
+/* 🎄 TITEL */
+h1,h2,h5{
   font-weight:900;
-  background:linear-gradient(90deg,#e0f2fe,#bae6fd);
+  background:linear-gradient(90deg,#fef3c7,#fca5a5,#86efac);
   -webkit-background-clip:text;
   color:transparent;
-  text-shadow:0 0 25px rgba(255,255,255,.6);
+  text-shadow:0 0 25px rgba(255,255,255,.8);
 }
 
-/* ❄️ BUTTON */
-.btn-winter{
-  background:linear-gradient(135deg,#bae6fd,#38bdf8);
-  border:none;
-  border-radius:50px;
-  color:#020617;
-  font-weight:700;
-  padding:10px 25px;
-  box-shadow:0 0 30px rgba(186,230,253,.9);
-}
-.btn-winter:hover{
-  transform:scale(1.07);
-}
-
-/* ❄️ FORM */
+/* ❄️ INPUTS */
 .form-control,.form-select{
-  background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.2);
+  color:white;
+  border:1px solid rgba(255,255,255,.5);
+}
+.form-control:focus,.form-select:focus{
+  box-shadow:0 0 15px rgba(186,230,253,1);
+  border-color:#bae6fd;
+}
+
+/* 🎅 BUTTON */
+.btn{
+  border-radius:999px;
+  font-weight:700;
+  background:linear-gradient(135deg,#16a34a,#dc2626);
+  border:none;
+  color:white;
+  box-shadow:0 0 30px rgba(34,197,94,.8);
+}
+.btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 45px rgba(220,38,38,1);
+}
+
+/* ❄️ LISTEN */
+.list-group-item{
+  background:rgba(255,255,255,.2);
   color:white;
 }
-.form-control::placeholder{color:#e0f2fe}
 
-/* 🗺 MAP */
+/* 🧊 MAP */
 #map{
-  height:350px;
-  border-radius:20px;
+  border-radius:18px;
+  box-shadow:0 0 40px rgba(186,230,253,.8);
 }
 </style>
-</head>
 
-<body>
-
-<!-- ❄️ SCHNEEFLOCKEN -->
 <script>
-for(let i=0;i<40;i++){
-  let s=document.createElement("div");
-  s.className="snowflake";
-  s.innerHTML="❄";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=5+Math.random()*10+"s";
-  s.style.fontSize=10+Math.random()*20+"px";
-  document.body.appendChild(s);
+for(let i=0;i<60;i++){
+  const snow=document.createElement("div");
+  snow.innerHTML="❄";
+  snow.style.position="fixed";
+  snow.style.top="-20px";
+  snow.style.left=Math.random()*100+"vw";
+  snow.style.fontSize=10+Math.random()*25+"px";
+  snow.style.opacity=Math.random();
+  snow.style.animation=`fall ${6+Math.random()*10}s linear infinite`;
+  document.body.appendChild(snow);
 }
+
+const style=document.createElement("style");
+style.innerHTML=`
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
+}`;
+document.head.appendChild(style);
 </script>
 
 <div class="container py-5">
