@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -266,23 +265,27 @@ $("#btnWeather").click(()=>$.get("https://api.open-meteo.com/v1/forecast?latitud
 $("#weather").html(`Max ${d.daily.temperature_2m_max[0]}°C<br>Min ${d.daily.temperature_2m_min[0]}°C`);
 }));
 
+// CHARGE
 $("#btnCharge").click(()=>{
 $("#charges").empty();
 $.get("https://data.geo.admin.ch/ch.bfe.ladestellen-elektromobilitaet/data/ch.bfe.ladestellen-elektromobilitaet.json",d=>{
 d.features.slice(0,5).forEach(s=>{
 const c=s.geometry.coordinates;
-$(`<li class="list-group-item">${s.properties.name||"Ladestation"}</li>`)
-.click(()=>{map.setView([c[1],c[0]],16);marker.setLatLng([c[1],c[0]]);})
+$(`<li class="list-group-item bg-transparent text-white">${s.properties.name||"Ladestation"}</li>`)
+.click(()=>{map.flyTo([c[1],c[0]],16);marker.setLatLng([c[1],c[0]]);})
 .appendTo("#charges");
 });
 });
 });
 
+// FORM
 $("#form").on("submit",function(e){
 e.preventDefault();
 if(!this.checkValidity()){this.classList.add("was-validated");return;}
+$.post("PASTE_DEIN_WEBHOOK_HIER",$(this).serialize(),()=>{
 $("#success").removeClass("d-none");
 this.reset();
+});
 });
 </script>
 
