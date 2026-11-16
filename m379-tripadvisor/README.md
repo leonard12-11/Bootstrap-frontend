@@ -7,7 +7,8 @@ Auswertung von 5'000 Hotelbewertungen mit dem KI-Werkzeug **JEV** (TypeSafe) fü
 | Abgabe | Datei |
 |---|---|
 | 1 Konzept | [`01_Konzept.md`](01_Konzept.md) |
-| 2 Notebook (kommentiert, mit Resultaten) | [`notebook/M379_Tripadvisor_Auswertung.ipynb`](notebook/M379_Tripadvisor_Auswertung.ipynb) |
+| 2 Notebook **eigenständig** (eine Datei, direkt in Jupyter) | [`notebook/M379_Tripadvisor_Standalone.ipynb`](notebook/M379_Tripadvisor_Standalone.ipynb) |
+| 2 Notebook (Variante mit `src/`-Modulen) | [`notebook/M379_Tripadvisor_Auswertung.ipynb`](notebook/M379_Tripadvisor_Auswertung.ipynb) |
 | 3 Management Summary + 3 Grafiken | [`02_Management_Summary.md`](02_Management_Summary.md), [`output/`](output/) |
 | 3 Präsentation (Ablauf 10 Min.) | [`03_Praesentation.md`](03_Praesentation.md) |
 | Reflexion | [`04_Reflexion.md`](04_Reflexion.md) |
