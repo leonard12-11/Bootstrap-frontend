@@ -1,0 +1,6 @@
+Problem,Anzahl Zeilen,Entscheid
+Fehlende Werte,0,keine Aktion
+Doppelter Text,0,entfernt (erste behalten)
+Note ausserhalb 1-5,0,entfernt
+Text < 50 Zeichen,0,"behalten, markiert"
+Texte mit maskierten Namen/Kontakten,79,maskiert vor Versand
